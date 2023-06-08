@@ -11,10 +11,10 @@ const RenderCampsite = (props) => {
                 <Card.Image source={{ uri: baseUrl + campsite.image}}>
                     <View style={{ justifyContent: 'center', flex: 1 }}>
                         <Text style={{ color: 'white', textAlign: 'center', fontSize: 20 }}>{campsite.name}</Text>
-                        <Icon name={props.isFavorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50' onPress={() => props.isFavorite ? console.log('Already set as a favorite') : props.markFavorite()} raised reversed />
                     </View>
                 </Card.Image>
                 <Text style={{ margin: 20 }}>{campsite.description}</Text>
+                <Icon name={props.isFavorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50' onPress={() => props.isFavorite ? console.log('Already set as a favorite') : props.markFavorite()} raised reverse />
             </Card>
         )
     }
