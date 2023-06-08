@@ -8,6 +8,7 @@ import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '
 import HomeScreen from './HomeScreen';
 import AboutScreen from './AboutScreen';
 import ContactScreen from './ContactScreen';
+import ReservationScreen from './ReservationScreen';
 import logo from '../assets/images/logo.png';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
@@ -81,6 +82,20 @@ const ContactNavigator = () => {
     )
 }
 
+const ReservationNavigator = () => {
+    const Stack = createStackNavigator();
+    return (
+        <Stack.Navigator initialRouteName='Contact' screenOptions={screenOptions}>
+            <Stack.Screen name='Reservation' component={ReservationScreen} options={({ navigation }) => ({ 
+                title:'Reservation Search',
+                headerLeft: () => (
+                    <Icon name='tree' type='font-awesome' iconStyle={styles.stackIcon} onPress={() => navigation.toggleDrawer()} />
+                )
+            })} />
+        </Stack.Navigator>
+    )
+}
+
 const CustomDrawerContent = (props) => (
     <DrawerContentScrollView {...props}>
         <View style={styles.drawerHeader}>
@@ -104,7 +119,7 @@ const Main = () => {
         dispatch(fetchPartners());
         dispatch(fetchComments());
     }, [dispatch]);
-    
+
     return (
         <View style={{ flex: 1, paddingTop: Platform.OS === 'ios' ? 0 : Constants.statusBarHeight }}>
             <Drawer.Navigator initialRouteName='Home' drawerStyle={{ backgroundColor: '#CEC8FF' }} drawerContent={CustomDrawerContent} >
@@ -130,6 +145,12 @@ const Main = () => {
                     title: 'Contact Us',
                     drawerIcon: ({ color }) => (
                         <Icon name='address-card' type='font-awesome' size={24} iconStyle={{width: 24}} color={color} />
+                    )
+                }} />
+                <Drawer.Screen name='ReservateCampsite' component={ReservationNavigator} options={{ 
+                    title: 'Reserve Campsite',
+                    drawerIcon: ({ color }) => (
+                        <Icon name='tree' type='font-awesome' size={24} iconStyle={{width: 24}} color={color} />
                     )
                 }} />
             </Drawer.Navigator>
